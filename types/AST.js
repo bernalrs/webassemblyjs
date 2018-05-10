@@ -203,17 +203,6 @@ type Identifier = {
  * Module structure
  */
 
-type ModuleFields = Array<Node>;
-
-type Module = {
-  ...BaseNode,
-
-  type: ModuleType,
-  id: ?string,
-  fields: ModuleFields,
-  metadata?: ModuleMetadata
-};
-
 type ModuleMetadata = {
   ...BaseNode,
 

@@ -1,5 +1,8 @@
 // @flow
 
+import { signatures } from "./signatures";
+export { module } from "./constructorFunctions";
+
 const {
   parse32F,
   parse64F,
@@ -9,8 +12,6 @@ const {
   isNanLiteral,
   isInfLiteral
 } = require("@webassemblyjs/wast-parser/lib/number-literals");
-
-const { signatures } = require("./signatures");
 
 function assert(cond: boolean) {
   if (!cond) {
@@ -108,30 +109,6 @@ export function program(body: Array<Node>): Program {
     type: "Program",
     body
   };
-}
-
-export function module(
-  id: ?string,
-  fields: ModuleFields,
-  metadata?: ModuleMetadata
-): Module {
-  if (id != null) {
-    assert(typeof id === "string");
-  }
-
-  assert(typeof fields === "object" && typeof fields.length !== "undefined");
-
-  const n: Module = {
-    type: "Module",
-    id,
-    fields
-  };
-
-  if (typeof metadata !== "undefined") {
-    n.metadata = metadata;
-  }
-
-  return n;
 }
 
 export function sectionMetadata(
