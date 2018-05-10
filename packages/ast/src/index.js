@@ -1,7 +1,15 @@
 // @flow
 
 import { signatures } from "./signatures";
-export { module, moduleMetadata } from "./constructorFunctions";
+export {
+  module,
+  moduleMetadata,
+  functionNameMetadata,
+  moduleNameMetadata,
+  localNameMetadata,
+  quoteModule,
+  binaryModule
+} from "./constructorFunctions";
 
 const {
   parse32F,
@@ -33,38 +41,6 @@ export function signature(object: string, name: string): SignatureMap {
 
   return sign[0];
 }
-
-export function moduleNameMetadata(value: string): ModuleNameMetadata {
-  return {
-    type: "ModuleNameMetadata",
-    value
-  };
-}
-
-export function functionNameMetadata(
-  value: string,
-  index: number
-): FunctionNameMetadata {
-  return {
-    type: "FunctionNameMetadata",
-    value,
-    index
-  };
-}
-
-export function localNameMetadata(
-  value: string,
-  localIndex: number,
-  functionIndex: number
-): LocalNameMetadata {
-  return {
-    type: "LocalNameMetadata",
-    value,
-    localIndex,
-    functionIndex
-  };
-}
-
 
 export function identifier(value: string): Identifier {
   return {
@@ -110,24 +86,6 @@ export function sectionMetadata(
     startOffset,
     size,
     vectorOfSize
-  };
-}
-
-export function binaryModule(id: ?string, blob: Array<string>): BinaryModule {
-  return {
-    type: "BinaryModule",
-    blob,
-    id,
-    fields: []
-  };
-}
-
-export function quoteModule(id: ?string, string: Array<string>): QuoteModule {
-  return {
-    type: "QuoteModule",
-    string,
-    id,
-    fields: []
   };
 }
 

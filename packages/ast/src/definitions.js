@@ -47,4 +47,63 @@ defineType("ModuleMetadata", {
   }
 });
 
+defineType("ModuleNameMetadata", {
+  fields: {
+    value: {
+      type: "string"
+    }
+  }
+});
+
+defineType("FunctionNameMetadata", {
+  fields: {
+    value: {
+      type: "string"
+    },
+    index: {
+      type: "number"
+    }
+  }
+});
+
+defineType("LocalNameMetadata", {
+  fields: {
+    value: {
+      type: "string"
+    },
+    localIndex: {
+      type: "number"
+    },
+    functionIndex: {
+      type: "number"
+    }
+  }
+});
+
+defineType("BinaryModule", {
+  fields: {
+    id: {
+      maybe: true,
+      type: "string"
+    },
+    blob: {
+      array: true,
+      type: "string"
+    }
+  }
+});
+
+defineType("QuoteModule", {
+  fields: {
+    id: {
+      maybe: true,
+      type: "string"
+    },
+    string: {
+      array: true,
+      type: "string"
+    }
+  }
+});
+
 module.exports = definitions;

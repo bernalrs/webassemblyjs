@@ -63,3 +63,84 @@ export function moduleMetadata(
 
   return node;
 }
+
+export function moduleNameMetadata(value: string): ModuleNameMetadata {
+  assert(typeof value === "string");
+
+  const node: ModuleNameMetadata = {
+    type: "ModuleNameMetadata",
+    value
+  };
+
+  return node;
+}
+
+export function functionNameMetadata(
+  value: string,
+  index: number
+): FunctionNameMetadata {
+  assert(typeof value === "string");
+
+  assert(typeof index === "number");
+
+  const node: FunctionNameMetadata = {
+    type: "FunctionNameMetadata",
+    value,
+    index
+  };
+
+  return node;
+}
+
+export function localNameMetadata(
+  value: string,
+  localIndex: number,
+  functionIndex: number
+): LocalNameMetadata {
+  assert(typeof value === "string");
+
+  assert(typeof localIndex === "number");
+
+  assert(typeof functionIndex === "number");
+
+  const node: LocalNameMetadata = {
+    type: "LocalNameMetadata",
+    value,
+    localIndex,
+    functionIndex
+  };
+
+  return node;
+}
+
+export function binaryModule(id: ?string, blob: Array<string>): BinaryModule {
+  if (id !== null && id !== undefined) {
+    assert(typeof id === "string");
+  }
+
+  assert(typeof blob === "object" && typeof blob.length !== "undefined");
+
+  const node: BinaryModule = {
+    type: "BinaryModule",
+    id,
+    blob
+  };
+
+  return node;
+}
+
+export function quoteModule(id: ?string, string: Array<string>): QuoteModule {
+  if (id !== null && id !== undefined) {
+    assert(typeof id === "string");
+  }
+
+  assert(typeof string === "object" && typeof string.length !== "undefined");
+
+  const node: QuoteModule = {
+    type: "QuoteModule",
+    id,
+    string
+  };
+
+  return node;
+}

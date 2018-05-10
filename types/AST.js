@@ -38,11 +38,6 @@ type Globalidx = U32Literal;
 type Localidx = U32Literal;
 type Labelidx = U32Literal;
 
-type ModuleType =
-  | "Module"
-  | "BinaryModule" // WAST
-  | "QuoteModule"; // WAST
-
 type Index =
   | Typeidx
   | Funcidx
@@ -200,43 +195,6 @@ type Identifier = {
 };
 
 /**
- * Module structure
- */
-
-type ModuleMetadata = {
-  ...BaseNode,
-
-  type: "ModuleMetadata",
-  sections: Array<SectionMetadata>,
-  functionNames?: Array<FunctionNameMetadata>,
-  localNames?: Array<LocalNameMetadata>
-};
-
-type ModuleNameMetadata = {
-  ...BaseNode,
-
-  type: "ModuleNameMetadata",
-  value: string
-};
-
-type FunctionNameMetadata = {
-  ...BaseNode,
-
-  type: "FunctionNameMetadata",
-  value: string,
-  index: number
-};
-
-type LocalNameMetadata = {
-  ...BaseNode,
-
-  type: "LocalNameMetadata",
-  value: string,
-  localIndex: number,
-  functionIndex: number
-};
-
-/**
  * SectionMetadata
  *
  * | id                              | section size             | section vector size          | ... body bytes                |
@@ -257,20 +215,6 @@ type SectionMetadata = {
 
   // Size of the vector in the section (if any)
   vectorOfSize: NumberLiteral
-};
-
-type BinaryModule = {
-  ...Module,
-
-  type: "BinaryModule",
-  blob: Array<string>
-};
-
-type QuoteModule = {
-  ...Module,
-
-  type: "QuoteModule",
-  string: Array<string>
 };
 
 type FuncParam = {

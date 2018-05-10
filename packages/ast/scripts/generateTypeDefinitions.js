@@ -14,7 +14,7 @@ function generate() {
   iterateProps(definitions, typeDefinition => {
     code += `
       type ${typeDefinition.name} = {
-        ...BaseNode,
+        ...${typeDefinition.extends || "BaseNode"},
         type: "${typeDefinition.name}",
         ${params(typeDefinition.fields)}
       };

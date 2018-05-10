@@ -52,7 +52,7 @@ function buildObject(typeDef) {
           node.${meta.name} = ${meta.name};
         }
       `;
-    };
+    }
   };
 
   return `
