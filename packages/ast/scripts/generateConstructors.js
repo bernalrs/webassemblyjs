@@ -38,12 +38,23 @@ function assertParams(fields) {
 
 function buildObject(typeDef) {
   const optionalField = meta => {
-    return `
-    if (typeof ${meta.name} !== "undefined") {
-      node.${meta.name} = ${meta.name};
-    }
-    `;
+    if (meta.array) {
+      // omit optional array properties if the constructor function was supplied
+      // with an empty array
+      return `
+        if (typeof ${meta.name} !== "undefined" && ${meta.name}.length > 0) {
+          node.${meta.name} = ${meta.name};
+        }
+      `;
+    } else {
+      return `
+        if (typeof ${meta.name} !== "undefined") {
+          node.${meta.name} = ${meta.name};
+        }
+      `;
+    };
   };
+
   return `
     const node: ${typeDef.name} = {
       type: "${typeDef.name}",

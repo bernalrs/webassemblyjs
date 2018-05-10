@@ -1,7 +1,7 @@
 // @flow
 
 import { signatures } from "./signatures";
-export { module } from "./constructorFunctions";
+export { module, moduleMetadata } from "./constructorFunctions";
 
 const {
   parse32F,
@@ -65,23 +65,6 @@ export function localNameMetadata(
   };
 }
 
-export function moduleMetadata(
-  sections: Array<SectionMetadata>,
-  functionNames: Array<FunctionNameMetadata>,
-  localNames: Array<LocalNameMetadata>
-): ModuleMetadata {
-  const n: ModuleMetadata = {
-    type: "ModuleMetadata",
-    sections
-  };
-  if (functionNames.length) {
-    n.functionNames = functionNames;
-  }
-  if (localNames.length) {
-    n.localNames = localNames;
-  }
-  return n;
-}
 
 export function identifier(value: string): Identifier {
   return {

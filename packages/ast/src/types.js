@@ -8,3 +8,11 @@ type Module = {
   fields: Array<Node>,
   metadata?: ModuleMetadata
 };
+
+type ModuleMetadata = {
+  ...BaseNode,
+  type: "ModuleMetadata",
+  sections: Array<SectionMetadata>,
+  functionNames?: Array<FunctionNameMetadata>,
+  localNames?: Array<ModuleMetadata>
+};

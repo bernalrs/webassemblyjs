@@ -1,14 +1,5 @@
 const definitions = {};
 
-// type Module = {
-//   ...BaseNode,
-
-//   type: ModuleType,
-//   id: ?string,
-//   fields: ModuleFields,
-//   metadata?: ModuleMetadata
-// };
-
 function defineType(typeName, metadata) {
   definitions[typeName] = metadata;
 }
@@ -32,6 +23,25 @@ defineType("Module", {
     },
     metadata: {
       optional: true,
+      type: "ModuleMetadata"
+    }
+  }
+});
+
+defineType("ModuleMetadata", {
+  fields: {
+    sections: {
+      array: true,
+      type: "SectionMetadata"
+    },
+    functionNames: {
+      optional: true,
+      array: true,
+      type: "FunctionNameMetadata"
+    },
+    localNames: {
+      optional: true,
+      array: true,
       type: "ModuleMetadata"
     }
   }
