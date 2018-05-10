@@ -194,28 +194,6 @@ type Identifier = {
   raw?: string
 };
 
-/**
- * SectionMetadata
- *
- * | id                              | section size             | section vector size          | ... body bytes                |
- * |---------------------------------|--------------------------|------------------------------|-------------------------------|
- * | u32                             | LEB128 u32 (1...5 bytes) | LEB128 u32 (1...5 bytes)     | n bytes                       |
- * |                                 | SectionMetadata size     | SectionMetadata vectorOfSize |                               |
- * | SectionMetadata Start offset -> |                          |                              |                               |
- */
-type SectionMetadata = {
-  ...BaseNode,
-
-  type: "SectionMetadata",
-  section: SectionName,
-
-  startOffset: number,
-
-  size: NumberLiteral,
-
-  // Size of the vector in the section (if any)
-  vectorOfSize: NumberLiteral
-};
 
 type FuncParam = {
   id: ?string,

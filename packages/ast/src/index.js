@@ -8,7 +8,8 @@ export {
   moduleNameMetadata,
   localNameMetadata,
   quoteModule,
-  binaryModule
+  binaryModule,
+  sectionMetadata
 } from "./constructorFunctions";
 
 const {
@@ -67,25 +68,6 @@ export function program(body: Array<Node>): Program {
   return {
     type: "Program",
     body
-  };
-}
-
-export function sectionMetadata(
-  section: SectionName,
-  startOffset: number,
-  size: NumberLiteral,
-  // $FlowIgnore
-  vectorOfSize: NumberLiteral = numberLiteral(-1)
-): SectionMetadata {
-  assert(size.type === "NumberLiteral");
-  assert(vectorOfSize.type === "NumberLiteral");
-
-  return {
-    type: "SectionMetadata",
-    section,
-    startOffset,
-    size,
-    vectorOfSize
   };
 }
 

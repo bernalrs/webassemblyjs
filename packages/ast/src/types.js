@@ -51,3 +51,12 @@ type QuoteModule = {
   id: ?string,
   string: Array<string>
 };
+
+type SectionMetadata = {
+  ...BaseNode,
+  type: "SectionMetadata",
+  section: SectionName,
+  startOffset: number,
+  size: NumberLiteral,
+  vectorOfSize: NumberLiteral
+};

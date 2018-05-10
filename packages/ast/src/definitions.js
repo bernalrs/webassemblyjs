@@ -106,4 +106,22 @@ defineType("QuoteModule", {
   }
 });
 
+defineType("SectionMetadata", {
+  fields: {
+    section: {
+      type: "SectionName"
+    },
+    startOffset: {
+      type: "number"
+    },
+    size: {
+      type: "NumberLiteral"
+    },
+    vectorOfSize: {
+      comment: "Size of the vector in the section (if any)",
+      type: "NumberLiteral"
+    }
+  }
+});
+
 module.exports = definitions;

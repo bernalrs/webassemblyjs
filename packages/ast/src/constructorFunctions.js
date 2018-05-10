@@ -144,3 +144,22 @@ export function quoteModule(id: ?string, string: Array<string>): QuoteModule {
 
   return node;
 }
+
+export function sectionMetadata(
+  section: SectionName,
+  startOffset: number,
+  size: NumberLiteral,
+  vectorOfSize: NumberLiteral
+): SectionMetadata {
+  assert(typeof startOffset === "number");
+
+  const node: SectionMetadata = {
+    type: "SectionMetadata",
+    section,
+    startOffset,
+    size,
+    vectorOfSize
+  };
+
+  return node;
+}
