@@ -1,7 +1,7 @@
 const fs = require("fs");
 const prettier = require("prettier");
 const definitions = require("../src/definitions");
-const { params, iterateProps, mapProps } = require("./util");
+const { params, iterateProps, mapProps, filterProps } = require("./util");
 
 const jsTypes = ["string", "number"];
 
@@ -55,13 +55,18 @@ function buildObject(typeDef) {
     }
   };
 
+  const fields = mapProps(typeDef.fields)
+    .filter(f => !f.optional && !f.constant)
+    .map(f => f.name);
+
+  const constants = mapProps(typeDef.fields)
+    .filter(f => f.constant)
+    .map(f => `${f.name}: "${f.value}"`);
+
   return `
     const node: ${typeDef.name} = {
       type: "${typeDef.name}",
-      ${mapProps(typeDef.fields)
-        .filter(f => !f.optional)
-        .map(f => f.name)
-        .join(",")}
+      ${constants.concat(fields).join(",")}
     }
     
     ${mapProps(typeDef.fields)
@@ -91,10 +96,10 @@ function generate() {
   iterateProps(definitions, typeDefinition => {
     code += `
     export function ${lowerCamelCase(typeDefinition.name)} (
-      ${params(typeDefinition.fields)}
+      ${params(filterProps(typeDefinition.fields, f => !f.constant))}
     ): ${typeDefinition.name} {
 
-      ${assertParams(typeDefinition.fields)}
+      ${assertParams(filterProps(typeDefinition.fields, f => !f.constant))}
       ${buildObject(typeDefinition)} 
 
       return node;

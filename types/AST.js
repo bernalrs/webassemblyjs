@@ -194,7 +194,6 @@ type Identifier = {
   raw?: string
 };
 
-
 type FuncParam = {
   id: ?string,
   valtype: Valtype
@@ -247,15 +246,6 @@ type ObjectInstruction = {
   ...GenericInstruction,
 
   object: Valtype
-};
-
-type LoopInstruction = {
-  ...BaseNode,
-
-  type: "LoopInstruction",
-  label: ?Identifier,
-  resulttype: ?Valtype,
-  instr: Array<Instruction>
 };
 
 type BlockInstruction = {

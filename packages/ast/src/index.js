@@ -9,7 +9,8 @@ export {
   localNameMetadata,
   quoteModule,
   binaryModule,
-  sectionMetadata
+  sectionMetadata,
+  loopInstruction
 } from "./constructorFunctions";
 
 const {
@@ -177,23 +178,6 @@ export function instruction(
   }
 
   return n;
-}
-
-export function loopInstruction(
-  label: Identifier,
-  resulttype: ?Valtype,
-  instr: Array<Instruction>
-): LoopInstruction {
-  assert(label !== null);
-  assert(typeof instr === "object" && typeof instr.length !== "undefined");
-
-  return {
-    type: "LoopInstruction",
-    id: "loop",
-    label,
-    resulttype,
-    instr
-  };
 }
 
 export function blockInstruction(

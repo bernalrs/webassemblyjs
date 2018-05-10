@@ -124,4 +124,26 @@ defineType("SectionMetadata", {
   }
 });
 
+defineType("LoopInstruction", {
+  fields: {
+    id: {
+      constant: true,
+      type: "string",
+      value: "loop"
+    },
+    label: {
+      maybe: true,
+      type: "Identifier"
+    },
+    resulttype: {
+      maybe: true,
+      type: "Valtype"
+    },
+    instr: {
+      array: true,
+      type: "Instruction"
+    }
+  }
+});
+
 module.exports = definitions;

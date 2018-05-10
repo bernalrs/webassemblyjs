@@ -60,3 +60,12 @@ type SectionMetadata = {
   size: NumberLiteral,
   vectorOfSize: NumberLiteral
 };
+
+type LoopInstruction = {
+  ...BaseNode,
+  type: "LoopInstruction",
+  id: string,
+  label: ?Identifier,
+  resulttype: ?Valtype,
+  instr: Array<Instruction>
+};

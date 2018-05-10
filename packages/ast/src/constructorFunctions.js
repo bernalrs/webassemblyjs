@@ -163,3 +163,21 @@ export function sectionMetadata(
 
   return node;
 }
+
+export function loopInstruction(
+  label: ?Identifier,
+  resulttype: ?Valtype,
+  instr: Array<Instruction>
+): LoopInstruction {
+  assert(typeof instr === "object" && typeof instr.length !== "undefined");
+
+  const node: LoopInstruction = {
+    type: "LoopInstruction",
+    id: "loop",
+    label,
+    resulttype,
+    instr
+  };
+
+  return node;
+}

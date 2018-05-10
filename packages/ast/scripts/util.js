@@ -6,6 +6,16 @@ function mapProps(obj) {
   return Object.keys(obj).map(key => ({ ...obj[key], name: key }));
 }
 
+function filterProps(obj, filter) {
+  const ret = {};
+  Object.keys(obj).forEach(key => {
+    if (filter(obj[key])) {
+      ret[key] = obj[key];
+    }
+  });
+  return ret;
+}
+
 function typeSignature(meta) {
   const type = meta.array ? `Array<${meta.type}>` : meta.type;
   if (meta.optional) {
@@ -26,6 +36,7 @@ function params(fields) {
 module.exports = {
   iterateProps,
   mapProps,
+  filterProps,
   typeSignature,
   params
 };
