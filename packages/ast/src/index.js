@@ -12,7 +12,19 @@ export {
   sectionMetadata,
   loopInstruction,
   instruction,
-  ifInstruction
+  ifInstruction,
+  longNumberLiteral,
+  stringLiteral,
+  floatLiteral
+} from "./constructorFunctions";
+
+// TODO: this is only being aliased to avid a naming collision with the current numberLiteral constructor
+// function. Ideally, the numberLiteral function would be renamed to indicate that it is a utility function
+// with additional business logic
+import {
+  longNumberLiteral,
+  floatLiteral,
+  numberLiteral as numberLiteralConstructor
 } from "./constructorFunctions";
 
 const {
@@ -57,13 +69,6 @@ export function valtype(name: Valtype): ValtypeLiteral {
   return {
     type: "ValtypeLiteral",
     name
-  };
-}
-
-export function stringLiteral(value: string): StringLiteral {
-  return {
-    type: "StringLiteral",
-    value
   };
 }
 
@@ -181,10 +186,6 @@ export function numberLiteral(
   rawValue: number | string,
   instructionType: Valtype = "i32"
 ): NumericLiteral {
-  let value;
-  let nan = false;
-  let inf = false;
-  let type = "NumberLiteral";
   const original = rawValue;
 
   // Remove numeric separators _
@@ -193,60 +194,37 @@ export function numberLiteral(
   }
 
   if (typeof rawValue === "number") {
-    value = rawValue;
+    return numberLiteralConstructor(rawValue, String(original));
   } else {
     switch (instructionType) {
       case "i32": {
-        value = parse32I(rawValue);
-        break;
+        return numberLiteralConstructor(parse32I(rawValue), String(original));
       }
       case "u32": {
-        value = parseU32(rawValue);
-        break;
+        return numberLiteralConstructor(parseU32(rawValue), String(original));
       }
       case "i64": {
-        type = "LongNumberLiteral";
-        value = parse64I(rawValue);
-        break;
+        return longNumberLiteral(parse64I(rawValue), String(original));
       }
       case "f32": {
-        type = "FloatLiteral";
-        value = parse32F(rawValue);
-        nan = isNanLiteral(rawValue);
-        inf = isInfLiteral(rawValue);
-        break;
+        return floatLiteral(
+          parse32F(rawValue),
+          isNanLiteral(rawValue),
+          isInfLiteral(rawValue),
+          String(original)
+        );
       }
       // f64
       default: {
-        type = "FloatLiteral";
-        value = parse64F(rawValue);
-        nan = isNanLiteral(rawValue);
-        inf = isInfLiteral(rawValue);
-        break;
+        return floatLiteral(
+          parse64F(rawValue),
+          isNanLiteral(rawValue),
+          isInfLiteral(rawValue),
+          String(original)
+        );
       }
     }
   }
-
-  // This is a hack to avoid rewriting all tests to have a "isnan: false" field
-  // $FlowIgnore: this is correct, but flow doesn't like mutations like this
-  const x: NumericLiteral = {
-    type,
-    value
-  };
-
-  if (nan === true) {
-    // $FlowIgnore
-    x.nan = true;
-  }
-
-  if (inf === true) {
-    // $FlowIgnore
-    x.inf = true;
-  }
-
-  x.raw = String(original);
-
-  return x;
 }
 
 export function getUniqueNameGenerator(): string => string {

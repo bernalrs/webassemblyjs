@@ -8,7 +8,7 @@ const {
   filterProps
 } = require("./util");
 
-const jsTypes = ["string", "number"];
+const jsTypes = ["string", "number", "boolean"];
 
 function params(fields) {
   const optionalDefault = field => (field.default ? ` = ${field.default}` : "");
@@ -63,6 +63,14 @@ function buildObject(typeDef) {
       return `
         if (Object.keys(${meta.name}).length !== 0) {
           node.${meta.name} = ${meta.name};
+        }
+      `;
+    } else if (meta.type === "boolean") {
+      // TODO: is this a good idea?!
+      // omit optional boolean properties if they are not true
+      return `
+        if (${meta.name} === true) {
+          node.${meta.name} = true;
         }
       `;
     } else {

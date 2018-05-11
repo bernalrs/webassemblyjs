@@ -20,16 +20,6 @@ type SectionName =
   | "code"
   | "data";
 
-type FloatLiteral = {
-  ...BaseNode,
-
-  type: "FloatLiteral",
-  value: number,
-  nan?: boolean,
-  inf?: boolean,
-  raw: string
-};
-
 type Typeidx = U32Literal;
 type Funcidx = U32Literal;
 type Tableidx = U32Literal;
@@ -162,28 +152,6 @@ type Program = {
 /**
  * Concrete values
  */
-type StringLiteral = {
-  ...BaseNode,
-
-  type: "StringLiteral",
-  value: string
-};
-
-type NumberLiteral = {
-  ...BaseNode,
-
-  type: "NumberLiteral",
-  value: number,
-  raw: string
-};
-
-type LongNumberLiteral = {
-  ...BaseNode,
-
-  type: "LongNumberLiteral",
-  value: LongNumber,
-  raw: string
-};
 
 type Identifier = {
   ...BaseNode,

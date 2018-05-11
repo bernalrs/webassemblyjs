@@ -124,6 +124,10 @@ defineType("SectionMetadata", {
   }
 });
 
+/*
+Instructions
+*/
+
 defineType("LoopInstruction", {
   fields: {
     id: {
@@ -195,6 +199,59 @@ defineType("IfInstruction", {
     alternate: {
       array: true,
       type: "Instruction"
+    }
+  }
+});
+
+/* 
+Concrete value types
+*/
+
+defineType("StringLiteral", {
+  fields: {
+    value: {
+      type: "string"
+    }
+  }
+});
+
+defineType("NumberLiteral", {
+  fields: {
+    value: {
+      type: "number"
+    },
+    raw: {
+      type: "string"
+    }
+  }
+});
+
+defineType("LongNumberLiteral", {
+  fields: {
+    value: {
+      type: "LongNumber"
+    },
+    raw: {
+      type: "string"
+    }
+  }
+});
+
+defineType("FloatLiteral", {
+  fields: {
+    value: {
+      type: "number"
+    },
+    nan: {
+      optional: true,
+      type: "boolean"
+    },
+    inf: {
+      optional: true,
+      type: "boolean"
+    },
+    raw: {
+      type: "string"
     }
   }
 });

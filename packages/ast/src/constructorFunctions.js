@@ -233,3 +233,78 @@ export function ifInstruction(
 
   return node;
 }
+
+export function stringLiteral(value: string): StringLiteral {
+  assert(typeof value === "string");
+
+  const node: StringLiteral = {
+    type: "StringLiteral",
+    value
+  };
+
+  return node;
+}
+
+export function numberLiteral(value: number, raw: string): NumberLiteral {
+  assert(typeof value === "number");
+
+  assert(typeof raw === "string");
+
+  const node: NumberLiteral = {
+    type: "NumberLiteral",
+    value,
+    raw
+  };
+
+  return node;
+}
+
+export function longNumberLiteral(
+  value: LongNumber,
+  raw: string
+): LongNumberLiteral {
+  assert(typeof raw === "string");
+
+  const node: LongNumberLiteral = {
+    type: "LongNumberLiteral",
+    value,
+    raw
+  };
+
+  return node;
+}
+
+export function floatLiteral(
+  value: number,
+  nan?: boolean,
+  inf?: boolean,
+  raw: string
+): FloatLiteral {
+  assert(typeof value === "number");
+
+  if (nan !== null && nan !== undefined) {
+    assert(typeof nan === "boolean");
+  }
+
+  if (inf !== null && inf !== undefined) {
+    assert(typeof inf === "boolean");
+  }
+
+  assert(typeof raw === "string");
+
+  const node: FloatLiteral = {
+    type: "FloatLiteral",
+    value,
+    raw
+  };
+
+  if (nan === true) {
+    node.nan = true;
+  }
+
+  if (inf === true) {
+    node.inf = true;
+  }
+
+  return node;
+}

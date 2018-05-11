@@ -88,3 +88,32 @@ type IfInstruction = {
   consequent: Array<Instruction>,
   alternate: Array<Instruction>
 };
+
+type StringLiteral = {
+  ...BaseNode,
+  type: "StringLiteral",
+  value: string
+};
+
+type NumberLiteral = {
+  ...BaseNode,
+  type: "NumberLiteral",
+  value: number,
+  raw: string
+};
+
+type LongNumberLiteral = {
+  ...BaseNode,
+  type: "LongNumberLiteral",
+  value: LongNumber,
+  raw: string
+};
+
+type FloatLiteral = {
+  ...BaseNode,
+  type: "FloatLiteral",
+  value: number,
+  nan?: boolean,
+  inf?: boolean,
+  raw: string
+};
