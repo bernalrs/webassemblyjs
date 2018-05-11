@@ -308,3 +308,31 @@ export function floatLiteral(
 
   return node;
 }
+
+export function elem(
+  table: Index,
+  offset: Array<Instruction>,
+  funcs: Array<Index>
+): Elem {
+  assert(typeof offset === "object" && typeof offset.length !== "undefined");
+
+  assert(typeof funcs === "object" && typeof funcs.length !== "undefined");
+
+  const node: Elem = {
+    type: "Elem",
+    table,
+    offset,
+    funcs
+  };
+
+  return node;
+}
+
+export function indexInFuncSection(index: Index): IndexInFuncSection {
+  const node: IndexInFuncSection = {
+    type: "IndexInFuncSection",
+    index
+  };
+
+  return node;
+}

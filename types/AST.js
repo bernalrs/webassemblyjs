@@ -365,21 +365,3 @@ type Start = {
   index: Index
 };
 
-type Elem = {
-  ...BaseNode,
-
-  type: "Elem",
-  table: Index,
-
-  // multiple expression are allow in WAST
-  offset: Array<Instruction>,
-
-  funcs: Array<Index>
-};
-
-type IndexInFuncSection = {
-  ...BaseNode,
-
-  type: "IndexInFuncSection",
-  index: Index
-};

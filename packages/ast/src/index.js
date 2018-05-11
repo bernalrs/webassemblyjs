@@ -15,7 +15,9 @@ export {
   ifInstruction,
   longNumberLiteral,
   stringLiteral,
-  floatLiteral
+  floatLiteral,
+  indexInFuncSection,
+  elem
 } from "./constructorFunctions";
 
 // TODO: this is only being aliased to avid a naming collision with the current numberLiteral constructor
@@ -482,26 +484,6 @@ export function callIndirectInstructionWithTypeRef(
 export function start(index: Index): Start {
   return {
     type: "Start",
-    index
-  };
-}
-
-export function elem(
-  table: Index = indexLiteral(0),
-  offset: Array<Instruction>,
-  funcs: Array<Index>
-): Elem {
-  return {
-    type: "Elem",
-    table,
-    offset,
-    funcs
-  };
-}
-
-export function indexInFuncSection(index: Index): IndexInFuncSection {
-  return {
-    type: "IndexInFuncSection",
     index
   };
 }

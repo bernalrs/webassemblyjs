@@ -256,4 +256,28 @@ defineType("FloatLiteral", {
   }
 });
 
+defineType("Elem", {
+  fields: {
+    table: {
+      type: "Index"
+    },
+    offset: {
+      array: true,
+      type: "Instruction"
+    },
+    funcs: {
+      array: true,
+      type: "Index"
+    }
+  }
+});
+
+defineType("IndexInFuncSection", {
+  fields: {
+    index: {
+      type: "Index"
+    }
+  }
+});
+
 module.exports = definitions;

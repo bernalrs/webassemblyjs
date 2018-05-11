@@ -117,3 +117,17 @@ type FloatLiteral = {
   inf?: boolean,
   raw: string
 };
+
+type Elem = {
+  ...BaseNode,
+  type: "Elem",
+  table: Index,
+  offset: Array<Instruction>,
+  funcs: Array<Index>
+};
+
+type IndexInFuncSection = {
+  ...BaseNode,
+  type: "IndexInFuncSection",
+  index: Index
+};

@@ -1547,7 +1547,7 @@ export function parse(tokensList: Array<Object>, source: string): Program {
      * var:    <nat> | <name>
      */
     function parseElem(): Elem {
-      let tableIndex;
+      let tableIndex = t.indexLiteral(0);
 
       const offset = [];
       const funcs = [];
