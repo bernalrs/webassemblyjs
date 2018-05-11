@@ -203,3 +203,33 @@ export function instruction(
 
   return node;
 }
+
+export function ifInstruction(
+  testLabel: Identifier,
+  test: Array<Instruction>,
+  result: ?Valtype,
+  consequent: Array<Instruction>,
+  alternate: Array<Instruction>
+): IfInstruction {
+  assert(typeof test === "object" && typeof test.length !== "undefined");
+
+  assert(
+    typeof consequent === "object" && typeof consequent.length !== "undefined"
+  );
+
+  assert(
+    typeof alternate === "object" && typeof alternate.length !== "undefined"
+  );
+
+  const node: IfInstruction = {
+    type: "IfInstruction",
+    id: "if",
+    testLabel,
+    test,
+    result,
+    consequent,
+    alternate
+  };
+
+  return node;
+}

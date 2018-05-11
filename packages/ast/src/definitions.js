@@ -169,4 +169,34 @@ defineType("Instruction", {
   }
 });
 
+defineType("IfInstruction", {
+  fields: {
+    id: {
+      constant: true,
+      type: "string",
+      value: "if"
+    },
+    testLabel: {
+      comment: "only for WAST",
+      type: "Identifier"
+    },
+    test: {
+      array: true,
+      type: "Instruction"
+    },
+    result: {
+      maybe: true,
+      type: "Valtype"
+    },
+    consequent: {
+      array: true,
+      type: "Instruction"
+    },
+    alternate: {
+      array: true,
+      type: "Instruction"
+    }
+  }
+});
+
 module.exports = definitions;

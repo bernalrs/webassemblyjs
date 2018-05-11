@@ -11,7 +11,8 @@ export {
   binaryModule,
   sectionMetadata,
   loopInstruction,
-  instruction
+  instruction,
+  ifInstruction
 } from "./constructorFunctions";
 
 const {
@@ -277,26 +278,6 @@ export function callInstruction(
   }
 
   return n;
-}
-
-export function ifInstruction(
-  testLabel: Identifier,
-  result: ?Valtype,
-  test: Array<Instruction>,
-  consequent: Array<Instruction>,
-  alternate: Array<Instruction>
-): IfInstruction {
-  assert(typeof testLabel.type === "string");
-
-  return {
-    type: "IfInstruction",
-    id: "if",
-    testLabel,
-    test,
-    result,
-    consequent,
-    alternate
-  };
 }
 
 /**

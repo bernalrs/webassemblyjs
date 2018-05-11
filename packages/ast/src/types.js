@@ -77,3 +77,14 @@ type GenericInstruction = {
   args: Array<Expression>,
   namedArgs?: Object
 };
+
+type IfInstruction = {
+  ...BaseNode,
+  type: "IfInstruction",
+  id: string,
+  testLabel: Identifier,
+  test: Array<Instruction>,
+  result: ?Valtype,
+  consequent: Array<Instruction>,
+  alternate: Array<Instruction>
+};

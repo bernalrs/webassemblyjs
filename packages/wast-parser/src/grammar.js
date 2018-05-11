@@ -639,8 +639,8 @@ export function parse(tokensList: Array<Object>, source: string): Program {
 
       return t.ifInstruction(
         label,
-        blockResult,
         testInstrs,
+        blockResult,
         consequent,
         alternate
       );
