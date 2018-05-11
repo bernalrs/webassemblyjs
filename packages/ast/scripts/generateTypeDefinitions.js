@@ -1,7 +1,13 @@
 const fs = require("fs");
 const prettier = require("prettier");
 const definitions = require("../src/definitions");
-const { params, iterateProps } = require("./util");
+const { typeSignature, mapProps, iterateProps } = require("./util");
+
+function params(fields) {
+  return mapProps(fields)
+    .map(typeSignature)
+    .join(",");
+}
 
 function generate() {
   const filename = "./src/types.js";
@@ -11,12 +17,12 @@ function generate() {
     /* eslint no-unused-vars: off */
   `;
 
-  iterateProps(definitions, typeDefinition => {
+  iterateProps(definitions, typeDef => {
     code += `
-      type ${typeDefinition.name} = {
-        ...${typeDefinition.extends || "BaseNode"},
-        type: "${typeDefinition.name}",
-        ${params(typeDefinition.fields)}
+      type ${typeDef.flowTypeName || typeDef.name} = {
+        ...${typeDef.extends || "BaseNode"},
+        type: "${typeDef.astTypeName || typeDef.name}",
+        ${params(typeDef.fields)}
       };
     `;
   });

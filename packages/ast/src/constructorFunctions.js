@@ -181,3 +181,25 @@ export function loopInstruction(
 
   return node;
 }
+
+export function instruction(
+  id: string,
+  args: Array<Expression> = [],
+  namedArgs?: Object = {}
+): GenericInstruction {
+  assert(typeof id === "string");
+
+  assert(typeof args === "object" && typeof args.length !== "undefined");
+
+  const node: GenericInstruction = {
+    type: "Instr",
+    id,
+    args
+  };
+
+  if (Object.keys(namedArgs).length !== 0) {
+    node.namedArgs = namedArgs;
+  }
+
+  return node;
+}

@@ -146,4 +146,27 @@ defineType("LoopInstruction", {
   }
 });
 
+defineType("Instruction", {
+  // TODO: ideally the naming of this type would be consistent across AST / Flow
+  astTypeName: "Instr",
+  flowTypeName: "GenericInstruction",
+  fields: {
+    id: {
+      type: "string"
+    },
+    args: {
+      array: true,
+      type: "Expression",
+      // TODO: should this be an optional property?
+      default: "[]"
+    },
+    namedArgs: {
+      optional: true,
+      type: "Object",
+      // TODO: should this be an optional property?
+      default: "{}"
+    }
+  }
+});
+
 module.exports = definitions;

@@ -10,7 +10,8 @@ export {
   quoteModule,
   binaryModule,
   sectionMetadata,
-  loopInstruction
+  loopInstruction,
+  instruction
 } from "./constructorFunctions";
 
 const {
@@ -147,29 +148,6 @@ export function objectInstruction(
     type: "Instr",
     id,
     object,
-    args
-  };
-
-  if (Object.keys(namedArgs).length !== 0) {
-    n.namedArgs = namedArgs;
-  }
-
-  return n;
-}
-
-export function instruction(
-  id: string,
-  args: Array<Expression> = [],
-  namedArgs: Object = {}
-): GenericInstruction {
-  assert(typeof args === "object" && typeof args.length !== "undefined");
-  assert(id !== "block");
-  assert(id !== "if");
-  assert(id !== "loop");
-
-  const n: GenericInstruction = {
-    type: "Instr",
-    id,
     args
   };
 

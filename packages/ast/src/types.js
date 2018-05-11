@@ -69,3 +69,11 @@ type LoopInstruction = {
   resulttype: ?Valtype,
   instr: Array<Instruction>
 };
+
+type GenericInstruction = {
+  ...BaseNode,
+  type: "Instr",
+  id: string,
+  args: Array<Expression>,
+  namedArgs?: Object
+};

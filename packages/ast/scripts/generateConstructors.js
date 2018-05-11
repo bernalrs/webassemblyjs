@@ -1,9 +1,21 @@
 const fs = require("fs");
 const prettier = require("prettier");
 const definitions = require("../src/definitions");
-const { params, iterateProps, mapProps, filterProps } = require("./util");
+const {
+  typeSignature,
+  iterateProps,
+  mapProps,
+  filterProps
+} = require("./util");
 
 const jsTypes = ["string", "number"];
+
+function params(fields) {
+  const optionalDefault = field => (field.default ? ` = ${field.default}` : "");
+  return mapProps(fields)
+    .map(field => `${typeSignature(field)}${optionalDefault(field)}`)
+    .join(",");
+}
 
 function assertParamType({ array, name, type }) {
   if (array) {
@@ -46,6 +58,13 @@ function buildObject(typeDef) {
           node.${meta.name} = ${meta.name};
         }
       `;
+    } else if (meta.type === "Object") {
+      // omit optional object properties if they have no keys
+      return `
+        if (Object.keys(${meta.name}).length !== 0) {
+          node.${meta.name} = ${meta.name};
+        }
+      `;
     } else {
       return `
         if (typeof ${meta.name} !== "undefined") {
@@ -64,8 +83,8 @@ function buildObject(typeDef) {
     .map(f => `${f.name}: "${f.value}"`);
 
   return `
-    const node: ${typeDef.name} = {
-      type: "${typeDef.name}",
+    const node: ${typeDef.flowTypeName || typeDef.name} = {
+      type: "${typeDef.astTypeName || typeDef.name}",
       ${constants.concat(fields).join(",")}
     }
     
@@ -97,7 +116,7 @@ function generate() {
     code += `
     export function ${lowerCamelCase(typeDefinition.name)} (
       ${params(filterProps(typeDefinition.fields, f => !f.constant))}
-    ): ${typeDefinition.name} {
+    ): ${typeDefinition.flowTypeName || typeDefinition.name} {
 
       ${assertParams(filterProps(typeDefinition.fields, f => !f.constant))}
       ${buildObject(typeDefinition)} 

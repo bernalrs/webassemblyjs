@@ -231,17 +231,6 @@ type Instruction =
   | GenericInstruction
   | ObjectInstruction;
 
-type GenericInstruction = {
-  ...BaseNode,
-
-  type: InstructionType,
-  id: string,
-  args: Array<Expression>,
-
-  // key=value for special instruction arguments
-  namedArgs?: Object
-};
-
 type ObjectInstruction = {
   ...GenericInstruction,
 

@@ -27,16 +27,9 @@ function typeSignature(meta) {
   }
 }
 
-function params(fields) {
-  return mapProps(fields)
-    .map(typeSignature)
-    .join(",");
-}
-
 module.exports = {
   iterateProps,
   mapProps,
   filterProps,
-  typeSignature,
-  params
+  typeSignature
 };
