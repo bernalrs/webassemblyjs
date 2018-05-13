@@ -17,7 +17,10 @@ export {
   stringLiteral,
   floatLiteral,
   indexInFuncSection,
-  elem
+  elem,
+  start,
+  valtypeLiteral as valtype,
+  typeInstruction
 } from "./constructorFunctions";
 
 // TODO: this is only being aliased to avid a naming collision with the current numberLiteral constructor
@@ -64,13 +67,6 @@ export function identifier(value: string): Identifier {
   return {
     type: "Identifier",
     value
-  };
-}
-
-export function valtype(name: Valtype): ValtypeLiteral {
-  return {
-    type: "ValtypeLiteral",
-    name
   };
 }
 
@@ -478,13 +474,6 @@ export function callIndirectInstructionWithTypeRef(
     type: "CallIndirectInstruction",
     signature: typeRef,
     intrs
-  };
-}
-
-export function start(index: Index): Start {
-  return {
-    type: "Start",
-    index
   };
 }
 

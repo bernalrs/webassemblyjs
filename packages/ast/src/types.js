@@ -131,3 +131,22 @@ type IndexInFuncSection = {
   type: "IndexInFuncSection",
   index: Index
 };
+
+type ValtypeLiteral = {
+  ...BaseNode,
+  type: "ValtypeLiteral",
+  name: Valtype
+};
+
+type TypeInstruction = {
+  ...BaseNode,
+  type: "TypeInstruction",
+  id: ?Index,
+  functype: Signature
+};
+
+type Start = {
+  ...BaseNode,
+  type: "Start",
+  index: Index
+};

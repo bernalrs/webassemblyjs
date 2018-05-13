@@ -280,4 +280,32 @@ defineType("IndexInFuncSection", {
   }
 });
 
+defineType("ValtypeLiteral", {
+  fields: {
+    name: {
+      type: "Valtype"
+    }
+  }
+});
+
+defineType("TypeInstruction", {
+  fields: {
+    id: {
+      maybe: true,
+      type: "Index"
+    },
+    functype: {
+      type: "Signature"
+    }
+  }
+});
+
+defineType("Start", {
+  fields: {
+    index: {
+      type: "Index"
+    }
+  }
+});
+
 module.exports = definitions;

@@ -336,3 +336,34 @@ export function indexInFuncSection(index: Index): IndexInFuncSection {
 
   return node;
 }
+
+export function valtypeLiteral(name: Valtype): ValtypeLiteral {
+  const node: ValtypeLiteral = {
+    type: "ValtypeLiteral",
+    name
+  };
+
+  return node;
+}
+
+export function typeInstruction(
+  id: ?Index,
+  functype: Signature
+): TypeInstruction {
+  const node: TypeInstruction = {
+    type: "TypeInstruction",
+    id,
+    functype
+  };
+
+  return node;
+}
+
+export function start(index: Index): Start {
+  const node: Start = {
+    type: "Start",
+    index
+  };
+
+  return node;
+}
