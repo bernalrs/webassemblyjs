@@ -308,4 +308,61 @@ defineType("Start", {
   }
 });
 
+defineType("GlobalType", {
+  fields: {
+    valtype: {
+      type: "Valtype"
+    },
+    mutability: {
+      type: "Mutability"
+    }
+  }
+});
+
+defineType("LeadingComment", {
+  fields: {
+    value: {
+      type: "string"
+    }
+  }
+});
+
+defineType("BlockComment", {
+  fields: {
+    value: {
+      type: "string"
+    }
+  }
+});
+
+defineType("Data", {
+  fields: {
+    memoryIndex: {
+      type: "Memidx"
+    },
+    offset: {
+      type: "Instruction"
+    },
+    init: {
+      type: "ByteArray"
+    }
+  }
+});
+
+defineType("Global", {
+  fields: {
+    globalType: {
+      type: "GlobalType"
+    },
+    init: {
+      array: true,
+      type: "Instruction"
+    },
+    name: {
+      maybe: true,
+      type: "Identifier"
+    }
+  }
+});
+
 module.exports = definitions;

@@ -20,15 +20,20 @@ export {
   elem,
   start,
   valtypeLiteral as valtype,
-  typeInstruction
+  typeInstruction,
+  leadingComment,
+  blockComment,
+  globalType,
+  global,
+  data
 } from "./constructorFunctions";
 
-// TODO: this is only being aliased to avid a naming collision with the current numberLiteral constructor
-// function. Ideally, the numberLiteral function would be renamed to indicate that it is a utility function
-// with additional business logic
 import {
   longNumberLiteral,
   floatLiteral,
+  // TODO: this is only being aliased to avoid a naming collision with the current numberLiteral constructor
+  // function. Ideally, the numberLiteral function would be renamed to indicate that it is a utility function
+  // with additional business logic
   numberLiteral as numberLiteralConstructor
 } from "./constructorFunctions";
 
@@ -371,61 +376,10 @@ export function memory(limits: Limit, id: ?Index): Memory {
   };
 }
 
-export function data(
-  memoryIndex: Memidx,
-  offset: Instruction,
-  init: ByteArray
-): Data {
-  return {
-    type: "Data",
-    memoryIndex,
-    offset,
-    init
-  };
-}
-
-export function global(
-  globalType: GlobalType,
-  init: Array<Instruction>,
-  name: ?Identifier
-): Global {
-  return {
-    type: "Global",
-    globalType,
-    init,
-    name
-  };
-}
-
-export function globalType(
-  valtype: Valtype,
-  mutability: Mutability
-): GlobalType {
-  return {
-    type: "GlobalType",
-    valtype,
-    mutability
-  };
-}
-
 export function byteArray(values: Array<Byte>): ByteArray {
   return {
     type: "Bytes",
     values
-  };
-}
-
-export function leadingComment(value: string): LeadingComment {
-  return {
-    type: "LeadingComment",
-    value
-  };
-}
-
-export function blockComment(value: string): BlockComment {
-  return {
-    type: "BlockComment",
-    value
   };
 }
 

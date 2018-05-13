@@ -150,3 +150,38 @@ type Start = {
   type: "Start",
   index: Index
 };
+
+type GlobalType = {
+  ...BaseNode,
+  type: "GlobalType",
+  valtype: Valtype,
+  mutability: Mutability
+};
+
+type LeadingComment = {
+  ...BaseNode,
+  type: "LeadingComment",
+  value: string
+};
+
+type BlockComment = {
+  ...BaseNode,
+  type: "BlockComment",
+  value: string
+};
+
+type Data = {
+  ...BaseNode,
+  type: "Data",
+  memoryIndex: Memidx,
+  offset: Instruction,
+  init: ByteArray
+};
+
+type Global = {
+  ...BaseNode,
+  type: "Global",
+  globalType: GlobalType,
+  init: Array<Instruction>,
+  name: ?Identifier
+};

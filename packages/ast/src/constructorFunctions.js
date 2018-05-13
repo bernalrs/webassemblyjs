@@ -367,3 +367,70 @@ export function start(index: Index): Start {
 
   return node;
 }
+
+export function globalType(
+  valtype: Valtype,
+  mutability: Mutability
+): GlobalType {
+  const node: GlobalType = {
+    type: "GlobalType",
+    valtype,
+    mutability
+  };
+
+  return node;
+}
+
+export function leadingComment(value: string): LeadingComment {
+  assert(typeof value === "string");
+
+  const node: LeadingComment = {
+    type: "LeadingComment",
+    value
+  };
+
+  return node;
+}
+
+export function blockComment(value: string): BlockComment {
+  assert(typeof value === "string");
+
+  const node: BlockComment = {
+    type: "BlockComment",
+    value
+  };
+
+  return node;
+}
+
+export function data(
+  memoryIndex: Memidx,
+  offset: Instruction,
+  init: ByteArray
+): Data {
+  const node: Data = {
+    type: "Data",
+    memoryIndex,
+    offset,
+    init
+  };
+
+  return node;
+}
+
+export function global(
+  globalType: GlobalType,
+  init: Array<Instruction>,
+  name: ?Identifier
+): Global {
+  assert(typeof init === "object" && typeof init.length !== "undefined");
+
+  const node: Global = {
+    type: "Global",
+    globalType,
+    init,
+    name
+  };
+
+  return node;
+}
